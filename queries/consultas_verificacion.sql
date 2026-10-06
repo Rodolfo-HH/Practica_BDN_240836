@@ -1,4 +1,4 @@
-USE db_test;
+USE db_test_7b;
 
 /* 1. Cuantas tablas existen en la base de datos db_test_7b? */
 SHOW TABLES;
