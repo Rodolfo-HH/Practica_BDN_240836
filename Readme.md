@@ -12,3 +12,4 @@ Periodo. Septiembre - Diciembre 2026
 |---|---|---|---|---|
 |1.|Metodologia de Evaluacion de la Materia | Transcribir en la libreta y comprender la metodologia y fechas de evaluacion de la asignatura | 5 | Concluida |
 |2.|Conexiones Remotas para Bases de Datos SQL| Crear y administrar usuarios y privilegios para conexiones desde internet o redes locales| 60 | Concluida|
+|3.|  |  | ?? | En Proceso |

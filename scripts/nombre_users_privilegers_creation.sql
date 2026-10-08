@@ -5,34 +5,19 @@ USE db_test_7b;
 -- ============================================================
 
 CREATE USER IF NOT EXISTS 'Rodolfo.Hernandez'@'%' 
-IDENTIFIED BY 'Rimuru30';
+IDENTIFIED BY '240836';
 
 CREATE USER IF NOT EXISTS 'Marco.Ramirez'@'%' 
-IDENTIFIED BY 'qwerely';
+IDENTIFIED BY 'Qwerely';
 
-CREATE USER IF NOT EXISTS 'user02'@'%' 
-IDENTIFIED BY '12345';
+CREATE USER IF NOT EXISTS 'Victor.Hernandez'@'%' 
+IDENTIFIED BY '240852';
 
-CREATE USER IF NOT EXISTS 'user03'@'%' 
-IDENTIFIED BY '12345';
+CREATE USER IF NOT EXISTS 'Diego.Garrido'@'%' 
+IDENTIFIED BY '240709';
 
-CREATE USER IF NOT EXISTS 'user04'@'%' 
-IDENTIFIED BY '12345';
-
-
--- ============================================================
--- PRIVILEGIOS DIRECTOS
--- ============================================================
-
--- RODOLFO: SUPER USUARIO
-GRANT ALL PRIVILEGES ON *.* 
-TO 'Rodolfo.Hernandez'@'%';
-
-
--- USER03: SELECT, INSERT, UPDATE Y DELETE
-GRANT SELECT, INSERT, UPDATE, DELETE
-ON db_test_7b.*
-TO 'user03'@'%';
+CREATE USER IF NOT EXISTS 'Oliver.Sanchez'@'%' 
+IDENTIFIED BY '240615';
 
 
 -- ============================================================
@@ -40,19 +25,11 @@ TO 'user03'@'%';
 -- ============================================================
 
 CREATE ROLE IF NOT EXISTS 'superadmin';
-
 CREATE ROLE IF NOT EXISTS 'admin';
-
-CREATE ROLE IF NOT EXISTS 'seller01';
-
-CREATE ROLE IF NOT EXISTS 'seller02';
-
+CREATE ROLE IF NOT EXISTS 'seller';
 CREATE ROLE IF NOT EXISTS 'buyer';
-
 CREATE ROLE IF NOT EXISTS 'support';
-
 CREATE ROLE IF NOT EXISTS 'common';
-
 CREATE ROLE IF NOT EXISTS 'user_not_registered';
 
 
@@ -60,26 +37,15 @@ CREATE ROLE IF NOT EXISTS 'user_not_registered';
 -- PRIVILEGIOS DE LOS ROLES
 -- ============================================================
 
--- ============================================================
--- SUPERADMIN
--- ============================================================
-
+-- SUPERADMIN: todos los privilegios sobre todo el servidor
 GRANT ALL PRIVILEGES ON *.* 
 TO 'superadmin';
 
-
--- ============================================================
--- ADMIN
--- ============================================================
-
+-- ADMIN: todos los privilegios sobre la base db_test_7b
 GRANT ALL PRIVILEGES ON db_test_7b.* 
 TO 'admin';
 
-
--- ============================================================
--- SUPPORT
--- ============================================================
-
+-- SUPPORT: SELECT, INSERT, UPDATE sobre tb_users y tb_products
 GRANT SELECT, INSERT, UPDATE 
 ON db_test_7b.tb_users 
 TO 'support';
@@ -88,47 +54,50 @@ GRANT SELECT, INSERT, UPDATE
 ON db_test_7b.tb_products 
 TO 'support';
 
-
--- ============================================================
--- SELLER
--- ============================================================
-
+-- SELLER: CRUD sobre tb_products
 GRANT SELECT, INSERT, UPDATE, DELETE 
 ON db_test_7b.tb_products 
-TO 'seller01';
+TO 'seller';
 
-GRANT SELECT, INSERT, UPDATE, DELETE 
+-- BUYER: solo lectura sobre tb_products
+GRANT SELECT 
 ON db_test_7b.tb_products 
-TO 'seller02';
+TO 'buyer';
+
+-- COMMON: solo lectura sobre tb_products
+GRANT SELECT 
+ON db_test_7b.tb_products 
+TO 'common';
+
+-- USER_NOT_REGISTERED: solo lectura sobre tb_products (catálogo público)
+GRANT SELECT 
+ON db_test_7b.tb_products 
+TO 'user_not_registered';
 
 
 -- ============================================================
--- ASIGNAR ROLES A LOS USUARIOS
+-- ASIGNACIÓN DE ROLES A LOS USUARIOS
 -- ============================================================
 
--- RODOLFO
+-- RODOLFO → SUPERADMIN
 GRANT 'superadmin' 
 TO 'Rodolfo.Hernandez'@'%';
 
-
--- MARCO
+-- MARCO → ADMIN
 GRANT 'admin' 
 TO 'Marco.Ramirez'@'%';
 
-
--- USER02
+-- VICTOR → SUPPORT
 GRANT 'support' 
-TO 'user02'@'%';
+TO 'Victor.Hernandez'@'%';
 
+-- DIEGO → SELLER
+GRANT 'seller' 
+TO 'Diego.Garrido'@'%';
 
--- USER03
-GRANT 'seller01' 
-TO 'user03'@'%';
-
-
--- USER04
-GRANT 'seller02' 
-TO 'user04'@'%';
+-- OLIVER → SELLER
+GRANT 'seller' 
+TO 'Oliver.Sanchez'@'%';
 
 
 -- ============================================================
@@ -142,20 +111,13 @@ SET DEFAULT ROLE 'admin'
 TO 'Marco.Ramirez'@'%';
 
 SET DEFAULT ROLE 'support' 
-TO 'user02'@'%';
+TO 'Victor.Hernandez'@'%';
 
-SET DEFAULT ROLE 'seller01' 
-TO 'user03'@'%';
+SET DEFAULT ROLE 'seller' 
+TO 'Diego.Garrido'@'%';
 
-SET DEFAULT ROLE 'seller02' 
-TO 'user04'@'%';
-
-
--- ============================================================
--- APLICAR CAMBIOS
--- ============================================================
-
-FLUSH PRIVILEGES;
+SET DEFAULT ROLE 'seller' 
+TO 'Oliver.Sanchez'@'%';
 
 
 -- ============================================================
@@ -169,22 +131,13 @@ FROM mysql.user
 WHERE User IN (
     'Rodolfo.Hernandez',
     'Marco.Ramirez',
-    'user02',
-    'user03',
-    'user04'
+    'Victor.Hernandez',
+    'Diego.Garrido',
+    'Oliver.Sanchez'
 );
 
-
--- ============================================================
--- VERIFICAR PRIVILEGIOS
--- ============================================================
-
 SHOW GRANTS FOR 'Rodolfo.Hernandez'@'%';
-
 SHOW GRANTS FOR 'Marco.Ramirez'@'%';
-
-SHOW GRANTS FOR 'user02'@'%';
-
-SHOW GRANTS FOR 'user03'@'%';
-
-SHOW GRANTS FOR 'user04'@'%';
+SHOW GRANTS FOR 'Victor.Hernandez'@'%';
+SHOW GRANTS FOR 'Diego.Garrido'@'%';
+SHOW GRANTS FOR 'Oliver.Sanchez'@'%';
