@@ -45,7 +45,7 @@ TO 'superadmin';
 GRANT ALL PRIVILEGES ON db_test_7b.* 
 TO 'admin';
 
--- SUPPORT: SELECT, INSERT, UPDATE sobre tb_users y tb_products
+-- SUPPORT: SELECT, INSERT, UPDATE sobre tb_users, tb_products, tb_categories, tbd_products_categories
 GRANT SELECT, INSERT, UPDATE 
 ON db_test_7b.tb_users 
 TO 'support';
@@ -53,6 +53,11 @@ TO 'support';
 GRANT SELECT, INSERT, UPDATE 
 ON db_test_7b.tb_products 
 TO 'support';
+
+GRANT SELECT, INSERT, UPDATE 
+ON db_test_7b.tbc_categories 
+TO 'support';
+
 
 -- SELLER: CRUD sobre tb_products
 GRANT SELECT, INSERT, UPDATE, DELETE 
