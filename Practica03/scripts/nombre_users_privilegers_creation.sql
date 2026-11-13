@@ -64,10 +64,26 @@ GRANT SELECT, INSERT, UPDATE, DELETE
 ON db_test_7b.tb_products 
 TO 'seller';
 
+-- BUYER -- 
+
 -- BUYER: solo lectura sobre tb_products
 GRANT SELECT 
 ON db_test_7b.tb_products 
 TO 'buyer';
+
+GRANT, SELECT, INSERT, UPDATE
+ON db_test_7b.tb_carts
+TO 'buyer';
+
+/* NO REGISTREF*/
+
+GRANT INSERT 
+ON db_test_7b.tb_users
+TO 'user_not_registered';
+
+GRANT INSERT 
+ON db_test_7b.tb_people
+TO 'user_not_registered';
 
 -- COMMON: solo lectura sobre tb_products
 GRANT SELECT 
@@ -78,7 +94,6 @@ TO 'common';
 GRANT SELECT 
 ON db_test_7b.tb_products 
 TO 'user_not_registered';
-
 
 -- ============================================================
 -- ASIGNACIÓN DE ROLES A LOS USUARIOS
@@ -103,7 +118,6 @@ TO 'Diego.Garrido'@'%';
 -- OLIVER → SELLER
 GRANT 'seller' 
 TO 'Oliver.Sanchez'@'%';
-
 
 -- ============================================================
 -- ESTABLECER ROLES PREDETERMINADOS
