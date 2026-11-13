@@ -1,0 +1,302 @@
+erDiagram
+    tb_buyer_orders {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned seller_ID FK "SQL: int unsigned"
+        decimal(12_2) subtotal "SQL: decimal(12,2)"
+        decimal(12_2) shipping_cost "SQL: decimal(12,2)"
+        enum(_Pending___Accepted___Preparing___Sent___Delivered___Canceled___Returned_) fulfillment_status "SQL: enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_carts {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned user_ID FK, UK "SQL: int unsigned"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_logs {
+        int ID PK
+        varchar(80) table_name
+        enum(_Create___READ___Update___Delete_) table_operation "SQL: enum('Create','READ','Update','Delete')"
+        varchar(80) db_user
+        datetime operation_date
+        text operation_description
+        bit(1) operation_status
+    }
+    tb_order_cancellations {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned payment_ID FK "SQL: int unsigned"
+        int_unsigned requested_by_user_ID FK "SQL: int unsigned"
+        text reason
+        enum(_Pending___Approved___Rejected___Completed_) cancellation_status "SQL: enum('Pending','Approved','Rejected','Completed')"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_orders {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned user_ID FK "SQL: int unsigned"
+        varchar(50) order_number UK
+        decimal(10_2) total_amount "SQL: decimal(10,2)"
+        enum(_Pending___Processing___Completed___Cancelled___Refunded_) order_status "SQL: enum('Pending','Processing','Completed','Cancelled','Refunded')"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_payment_transaction {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned payment_ID FK "SQL: int unsigned"
+        enum(_Charge___Refund___Authorization___Void_) transaction_type "SQL: enum('Charge','Refund','Authorization','Void')"
+        decimal(10_2) amount "SQL: decimal(10,2)"
+        varchar(3) currency
+        varchar(255) gateway_transaction_id
+        text gateway_response
+        enum(_Pending___Completed___Failed___Cancelled_) operation_status "SQL: enum('Pending','Completed','Failed','Cancelled')"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_payments {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned user_ID FK "SQL: int unsigned"
+        int_unsigned payment_method_type_ID FK "SQL: int unsigned"
+        bigint_unsigned user_payment_method_ID FK "SQL: bigint unsigned"
+        decimal(10_2) total_amount "SQL: decimal(10,2)"
+        varchar(3) currency
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_people {
+        bigint_unsigned person_ID PK "SQL: bigint unsigned"
+        int_unsigned user_ID FK, UK "SQL: int unsigned"
+        varchar(20) courtesy_title
+        varchar(150) given_names
+        varchar(150) family_names
+        date birth_date
+        enum(_Hombre___Mujer___Prefiero_no_decirlo_) gender "SQL: enum('Hombre','Mujer','Prefiero no decirlo')"
+        char(2) country_code
+        varchar(25) phone
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_products {
+        int_unsigned ID PK "SQL: int unsigned"
+        varchar(50) SKU UK
+        varchar(250) name
+        text description
+        decimal(10_2) current_price "SQL: decimal(10,2)"
+        int_unsigned current_stock "SQL: int unsigned"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_products_users_providers {
+        int_unsigned user_ID PK, FK "SQL: int unsigned"
+        int_unsigned product_ID PK, FK "SQL: int unsigned"
+        enum(_Owner___Reseller___Distributor_) type_ownership "SQL: enum('Owner','Reseller','Distributor')"
+        bit(1) status
+        datetime available_date
+        datetime creation_date
+        datetime last_update
+    }
+    tb_refunds {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned payment_ID FK "SQL: int unsigned"
+        int_unsigned cancellation_ID FK "SQL: int unsigned"
+        int_unsigned return_ID FK "SQL: int unsigned"
+        decimal(10_2) refund_amount "SQL: decimal(10,2)"
+        text refund_reason
+        enum(_Pending___Processing___Completed___Failed_) refund_status "SQL: enum('Pending','Processing','Completed','Failed')"
+        varchar(255) gateway_refund_id
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_returns {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned payment_ID FK "SQL: int unsigned"
+        int_unsigned product_ID FK "SQL: int unsigned"
+        int_unsigned user_ID FK "SQL: int unsigned"
+        int_unsigned quantity "SQL: int unsigned"
+        text return_reason
+        enum(_Requested___Received___Inspected___Accepted___Rejected_) return_status "SQL: enum('Requested','Received','Inspected','Accepted','Rejected')"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_shipments {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned payment_ID FK "SQL: int unsigned"
+        varchar(100) shipping_company
+        varchar(100) tracking_number
+        decimal(10_2) shipping_cost "SQL: decimal(10,2)"
+        enum(_Pending___Preparing___Shipped___In_Transit___Delivered___Failed_) shipping_status "SQL: enum('Pending','Preparing','Shipped','In_Transit','Delivered','Failed')"
+        datetime shipped_date
+        datetime estimated_delivery_date
+        datetime actual_delivery_date
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_user_addresses {
+        bigint_unsigned ID PK "SQL: bigint unsigned"
+        int_unsigned user_ID FK "SQL: int unsigned"
+        varchar(100) address_label
+        varchar(150) recipient_name
+        varchar(25) recipient_phone
+        varchar(500) delivery_instructions
+        decimal(10_7) latitude "SQL: decimal(10,7)"
+        decimal(10_7) longitude "SQL: decimal(10,7)"
+        tinyint(1) is_default
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_users {
+        int_unsigned ID PK "SQL: int unsigned"
+        varchar(100) email UK
+        varchar(50) nick UK
+        varchar(255) password
+        datetime creation_date
+        datetime last_update
+        datetime last_login
+        bit(1) status
+    }
+    tbc_categories {
+        int_unsigned ID PK "SQL: int unsigned"
+        varchar(120) name UK
+        text description
+        int_unsigned sup_id_category FK "SQL: int unsigned"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tbc_payment_methods_types {
+        int_unsigned ID PK "SQL: int unsigned"
+        varchar(30) code UK
+        text description
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tbd_address_components {
+        bigint_unsigned ID PK UK "SQL: bigint unsigned"
+        bigint_unsigned address_ID FK UK "SQL: bigint unsigned"
+        varchar(255) value
+        varchar(50) component_type
+        bit(1) status
+        bigint_unsigned address_sup_ID FK "SQL: bigint unsigned"
+        datetime creation_date
+        datetime last_update
+    }
+    tbd_cancellation_items {
+        int_unsigned cancellation_ID PK, FK "SQL: int unsigned"
+        int_unsigned product_ID PK, FK "SQL: int unsigned"
+        int_unsigned quantity "SQL: int unsigned"
+        text cancellation_reason
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tbd_carts_items {
+        int_unsigned cart_ID PK, FK "SQL: int unsigned"
+        int_unsigned provider_ID PK, FK "SQL: int unsigned"
+        int_unsigned product_ID PK, FK "SQL: int unsigned"
+        int_unsigned quantity "SQL: int unsigned"
+        datetime creation_date
+    }
+    tbd_order_items {
+        int_unsigned ID PK "SQL: int unsigned"
+        int_unsigned seller_order_ID FK "SQL: int unsigned"
+        int_unsigned product_ID FK "SQL: int unsigned"
+        int_unsigned provider_ID FK "SQL: int unsigned"
+        varchar(255) product_name
+        int_unsigned quantity "SQL: int unsigned"
+        decimal(12_2) unit_price "SQL: decimal(12,2)"
+        decimal(12_2) subtotal "SQL: decimal(12,2)"
+        datetime creation_date
+    }
+    tbd_product_categories {
+        int_unsigned product_Id PK, FK "SQL: int unsigned"
+        int_unsigned category_Id PK, FK "SQL: int unsigned"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tbd_return_items {
+        int_unsigned return_ID PK, FK "SQL: int unsigned"
+        int_unsigned product_ID PK, FK "SQL: int unsigned"
+        int_unsigned quantity "SQL: int unsigned"
+        enum(_New___Opened___Defective___Damaged_) item_condition "SQL: enum('New','Opened','Defective','Damaged')"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tbd_user_payment_methods {
+        bigint_unsigned ID PK "SQL: bigint unsigned"
+        int_unsigned user_ID FK "SQL: int unsigned"
+        int_unsigned payment_method_type_ID FK "SQL: int unsigned"
+        varchar(60) provider UK
+        varchar(255) provider_method_ref UK
+        varchar(100) label
+        char(4) last_four
+        tinyint(1) is_default
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tbd_users_wishlist_products {
+        int_unsigned user_ID PK, FK "SQL: int unsigned"
+        int_unsigned product_ID PK, FK "SQL: int unsigned"
+        bit(1) status
+        datetime creation_date
+        datetime last_update
+    }
+    tb_users ||--o{ tb_buyer_orders : "incluye tb_buyer_orders por seller_ID (1:N)"
+    tb_users ||--o| tb_carts : "incluye tb_carts por user_ID (1:1)"
+    tb_payments ||--o{ tb_order_cancellations : "incluye tb_order_cancellations por payment_ID (1:N)"
+    tb_users ||--o{ tb_order_cancellations : "incluye tb_order_cancellations por requested_by_user_ID (1:N)"
+    tb_users ||--o{ tb_orders : "incluye tb_orders por user_ID (1:N)"
+    tb_payments ||--o{ tb_payment_transaction : "incluye tb_payment_transaction por payment_ID (1:N)"
+    tbc_payment_methods_types ||--o{ tb_payments : "incluye tb_payments por payment_method_type_ID (1:N)"
+    tb_users ||--o{ tb_payments : "incluye tb_payments por user_ID (1:N)"
+    tbd_user_payment_methods o|--o{ tb_payments : "incluye tb_payments por user_payment_method_ID (1:N)"
+    tb_users o|--o| tb_people : "incluye tb_people por user_ID (1:1)"
+    tb_products ||--o{ tb_products_users_providers : "incluye tb_products_users_providers por product_ID (1:N)"
+    tb_users ||--o{ tb_products_users_providers : "incluye tb_products_users_providers por user_ID (1:N)"
+    tb_order_cancellations o|--o{ tb_refunds : "incluye tb_refunds por cancellation_ID (1:N)"
+    tb_payments ||--o{ tb_refunds : "incluye tb_refunds por payment_ID (1:N)"
+    tb_returns o|--o{ tb_refunds : "incluye tb_refunds por return_ID (1:N)"
+    tb_payments ||--o{ tb_returns : "incluye tb_returns por payment_ID (1:N)"
+    tb_products ||--o{ tb_returns : "incluye tb_returns por product_ID (1:N)"
+    tb_users ||--o{ tb_returns : "incluye tb_returns por user_ID (1:N)"
+    tb_payments ||--o{ tb_shipments : "incluye tb_shipments por payment_ID (1:N)"
+    tb_users ||--o{ tb_user_addresses : "incluye tb_user_addresses por user_ID (1:N)"
+    tbc_categories o|--o{ tbc_categories : "es padre de (1:N)"
+    tb_user_addresses ||--o{ tbd_address_components : "incluye tbd_address_components por address_ID (1:N)"
+    tbd_address_components o|--o{ tbd_address_components : "es padre de (1:N)"
+    tb_order_cancellations ||--o{ tbd_cancellation_items : "incluye tbd_cancellation_items por cancellation_ID (1:N)"
+    tb_products ||--o{ tbd_cancellation_items : "incluye tbd_cancellation_items por product_ID (1:N)"
+    tb_carts ||--o{ tbd_carts_items : "incluye tbd_carts_items por cart_ID (1:N)"
+    tb_products_users_providers ||--o{ tbd_carts_items : "incluye tbd_carts_items por provider_ID (1:N)"
+    tb_products_users_providers ||--o{ tbd_carts_items : "incluye tbd_carts_items por product_ID (1:N)"
+    tb_buyer_orders ||--o{ tbd_order_items : "incluye tbd_order_items por seller_order_ID (1:N)"
+    tb_products_users_providers ||--o{ tbd_order_items : "incluye tbd_order_items por product_ID (1:N)"
+    tb_products_users_providers ||--o{ tbd_order_items : "incluye tbd_order_items por provider_ID (1:N)"
+    tbc_categories ||--o{ tbd_product_categories : "incluye tbd_product_categories por category_Id (1:N)"
+    tb_products ||--o{ tbd_product_categories : "incluye tbd_product_categories por product_Id (1:N)"
+    tb_products ||--o{ tbd_return_items : "incluye tbd_return_items por product_ID (1:N)"
+    tb_returns ||--o{ tbd_return_items : "incluye tbd_return_items por return_ID (1:N)"
+    tb_users ||--o{ tbd_user_payment_methods : "incluye tbd_user_payment_methods por user_ID (1:N)"
+    tbc_payment_methods_types ||--o{ tbd_user_payment_methods : "incluye tbd_user_payment_methods por payment_method_type_ID (1:N)"
+    tb_products ||--o{ tbd_users_wishlist_products : "incluye tbd_users_wishlist_products por product_ID (1:N)"
+    tb_users ||--o{ tbd_users_wishlist_products : "incluye tbd_users_wishlist_products por user_ID (1:N)"
+    tb_products }o--o{ tb_users : "N:M mediante tb_products_users_providers"
+    tb_order_cancellations }o--o{ tb_products : "N:M mediante tbd_cancellation_items"
+    tbc_categories }o--o{ tb_products : "N:M mediante tbd_product_categories"
+    tb_products }o--o{ tb_returns : "N:M mediante tbd_return_items"
+    tb_products }o--o{ tb_users : "N:M mediante tbd_users_wishlist_products"
