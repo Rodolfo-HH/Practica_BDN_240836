@@ -51,11 +51,11 @@ También se definen **26 vistas**, es decir, consultas guardadas que presentan i
 
 ## Documentos generados
 
-- [Índice de documentos](index.html)
+- [Índice de documentos](https://rodolfo-hh.github.io/Practica_BDN_240836/Practica03/index.html)
 - [Inventario del esquema](resumen_respaldo5.md) — nombre histórico; su contenido corresponde a Respaldo-06.
-- [Diagrama de relaciones en HTML](relaciones-respaldo6.html)
+- [Diagrama de relaciones en HTML](https://rodolfo-hh.github.io/Practica_BDN_240836/Practica03/relaciones-respaldo6.html)
 - [Fuente Mermaid del diagrama](relaciones_respaldo6.mmd)
-- [Diccionario de datos en HTML](diccionario_datos_respaldo6.html)
+- [Diccionario de datos en HTML](https://rodolfo-hh.github.io/Practica_BDN_240836/Practica03/diccionario_datos_respaldo6.html)
 - [Diccionario de datos en Markdown](diccionario_datos_respaldo6.md)
 - [Diccionario de datos en CSV](diccionario_datos_respaldo6.csv)
 - [Respaldo SQL de origen](backups/Respaldo-06.sql)
