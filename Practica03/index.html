@@ -1,0 +1,29 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Practica 03 | Documentos de Respaldo-06</title>
+<style>
+:root{color-scheme:dark;--bg:#0E1117;--panel:#161B24;--text:#D8DEE9;--muted:#AEB8C6;--cyan:#5CE1E6;--pink:#E879C9;--mint:#7CF2A8;--amber:#F5C26B;--violet:#A78BFA;--line:#3B4655}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,"Segoe UI",sans-serif}a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:1250px;margin:auto;padding:34px 22px}.hero{padding:clamp(25px,5vw,48px);border:1px solid #3d4a5b;border-radius:18px;background:linear-gradient(140deg,#172531,#211c2d);box-shadow:0 0 22px rgba(92,225,230,.13)}.eyebrow{color:var(--cyan);font-size:16px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.15;margin:8px 0}.hero p{max-width:850px;color:#C1CAD6}.counts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:20px}.count{background:#111821;border:1px solid #354251;border-radius:11px;padding:13px}.count b{display:block;color:var(--cyan);font-size:27px}.count span{color:var(--muted)}h2{margin:34px 0 12px;font-size:25px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:12px;padding:18px;box-shadow:0 0 16px rgba(92,225,230,.08)}.card.diagram{border-left-color:var(--cyan)}.card.dictionary{border-left-color:var(--violet)}.card.inventory{border-left-color:var(--mint)}.card.source{border-left-color:var(--amber)}.card h3{margin:0 0 7px;font-size:19px}.card p{margin:0 0 12px;color:#C1CAD6}.card a{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:6px 12px}.tag{display:inline-block;color:var(--muted);font-size:14px;margin-bottom:7px}.note{color:var(--muted);margin-top:24px;border-top:1px solid var(--line);padding-top:16px}@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="hero"><div class="eyebrow">Practica 03 · Base de Datos en la Nube</div><h1>Documentos del Respaldo-06</h1><p>Guia de lectura, inventario, relaciones y diccionario de datos generados a partir del esquema. Los conteos se verificaron contra el respaldo SQL; no se analizaron los INSERT para describir la estructura.</p><div class="counts"><div class="count"><b>25</b><span>tablas</span></div><div class="count"><b>26</b><span>vistas</span></div><div class="count"><b>72</b><span>triggers</span></div><div class="count"><b>39</b><span>llaves foraneas</span></div><div class="count"><b>2</b><span>autorreferenciales</span></div></div></header>
+<h2>Guia e inventario</h2><div class="grid">
+<article class="card inventory"><span class="tag">Inventario completo</span><h3>Resumen del esquema</h3><p>Tablas, columnas, llaves, vistas, triggers, rutinas y observaciones. El nombre del archivo se conserva por compatibilidad; su contenido corresponde a Respaldo-06.</p><a href="resumen_respaldo5.md">Abrir resumen</a></article>
+<article class="card inventory"><span class="tag">Descripcion de la practica</span><h3>Readme</h3><p>Resumen de objetivos, estructura, auditoria y resultados.</p><a href="Readme.md">Abrir Readme</a></article>
+</div>
+<h2>Relaciones</h2><div class="grid">
+<article class="card diagram"><span class="tag">Lectura visual</span><h3>Diagrama de relaciones</h3><p>Diagrama navegable con tablas, campos, llaves y relaciones; funciona sin conexion porque incluye el dibujo SVG.</p><a href="relaciones-respaldo6.html">Abrir diagrama</a></article>
+<article class="card diagram"><span class="tag">Fuente Mermaid</span><h3>Diagrama editable</h3><p>Texto Mermaid del diagrama entidad-relacion para editar o volver a renderizar.</p><a href="relaciones_respaldo6.mmd">Abrir archivo .mmd</a></article>
+</div>
+<h2>Diccionario de datos</h2><div class="grid">
+<article class="card dictionary"><span class="tag">Guia para lectura en navegador</span><h3>Diccionario interactivo</h3><p>Explica tablas, columnas, vistas y automatismos en lenguaje sencillo, con buscador, filtros e indice lateral.</p><a href="diccionario_datos_respaldo6.html">Abrir diccionario HTML</a></article>
+<article class="card dictionary"><span class="tag">Documento Markdown</span><h3>Diccionario en texto</h3><p>Una fila por columna con tipo, longitud, llaves, obligatoriedad, valores y dominio.</p><a href="diccionario_datos_respaldo6.md">Abrir diccionario MD</a></article>
+<article class="card dictionary"><span class="tag">Hoja de calculo</span><h3>Diccionario CSV</h3><p>El mismo inventario tabular para filtrar o abrir en una hoja de calculo.</p><a href="diccionario_datos_respaldo6.csv">Abrir diccionario CSV</a></article>
+</div>
+<h2>Archivo de origen</h2><div class="grid"><article class="card source"><span class="tag">Respaldo SQL</span><h3>Respaldo-06.sql</h3><p>Archivo fuente del que se extrajo la estructura documentada.</p><a href="backups/Respaldo-06.sql">Abrir respaldo</a></article></div>
+<p class="note">Base indicada en el respaldo: db_test_7b · MySQL 8.0.44 · Practica BDN.</p>
+</main></body></html>
