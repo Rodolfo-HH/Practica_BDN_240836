@@ -1,0 +1,208 @@
+﻿tabla,columna,tipo,nulabilidad,default,auto_increment,PK,FK,ON DELETE,ON UPDATE,UNIQUE,índices,restricciones CHECK,descripción,registros_en_Respaldo_05
+tb_buyer_orders,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,8
+tb_buyer_orders,seller_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tb_buyer_orders_ibfk_1: tb_buyer_orders.seller_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,seller_ID(seller_ID),—,Identificador relacionado con seller.,8
+tb_buyer_orders,subtotal,"decimal(12,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,tb_buyer_orders_chk_1: (`subtotal` >= 0),Dato de subtotal; el respaldo no incluye una descripción funcional adicional.,8
+tb_buyer_orders,shipping_cost,"decimal(12,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,tb_buyer_orders_chk_2: (`shipping_cost` >= 0),Dato de shipping cost; el respaldo no incluye una descripción funcional adicional.,8
+tb_buyer_orders,fulfillment_status,"enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')",NOT NULL,'Pending',No,No,No,—,—,No,—,—,Dato de fulfillment status; el respaldo no incluye una descripción funcional adicional.,8
+tb_buyer_orders,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,8
+tb_buyer_orders,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,8
+tb_buyer_orders,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,8
+tb_carts,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,5
+tb_carts,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tb_carts_ibfk_1: tb_carts.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),Sí,uk_cart_user(user_ID) UNIQUE,—,Identificador relacionado con user.,5
+tb_carts,status,bit(1),NULL permitido,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,5
+tb_carts,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,5
+tb_carts,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,5
+tb_logs,ID,int,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,53413
+tb_logs,table_name,varchar(80),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de table name; el respaldo no incluye una descripción funcional adicional.,53413
+tb_logs,table_operation,"enum('Create','READ','Update','Delete')",NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de table operation; el respaldo no incluye una descripción funcional adicional.,53413
+tb_logs,db_user,varchar(80),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de db user; el respaldo no incluye una descripción funcional adicional.,53413
+tb_logs,operation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de operation date; el respaldo no incluye una descripción funcional adicional.,53413
+tb_logs,operation_description,text,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de operation description; el respaldo no incluye una descripción funcional adicional.,53413
+tb_logs,operation_status,bit(1),NULL permitido,b'1',No,No,No,—,—,No,—,—,Dato de operation status; el respaldo no incluye una descripción funcional adicional.,53413
+tb_order_cancellations,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,2
+tb_order_cancellations,payment_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_order_cancellations_payment: tb_order_cancellations.payment_ID → tb_payments.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_order_cancellations_payment(payment_ID),—,Identificador relacionado con payment.,2
+tb_order_cancellations,requested_by_user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_order_cancellations_user: tb_order_cancellations.requested_by_user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_order_cancellations_user(requested_by_user_ID),—,Identificador relacionado con requested by user.,2
+tb_order_cancellations,reason,text,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de reason; el respaldo no incluye una descripción funcional adicional.,2
+tb_order_cancellations,cancellation_status,"enum('Pending','Approved','Rejected','Completed')",NOT NULL,'Pending',No,No,No,—,—,No,—,—,Dato de cancellation status; el respaldo no incluye una descripción funcional adicional.,2
+tb_order_cancellations,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,2
+tb_order_cancellations,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,2
+tb_order_cancellations,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,2
+tb_orders,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,4
+tb_orders,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_orders_user: tb_orders.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_orders_user(user_ID),—,Identificador relacionado con user.,4
+tb_orders,order_number,varchar(50),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,Sí,uk_order_number(order_number) UNIQUE,—,Dato de order number; el respaldo no incluye una descripción funcional adicional.,4
+tb_orders,total_amount,"decimal(10,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,—,Dato de total amount; el respaldo no incluye una descripción funcional adicional.,4
+tb_orders,order_status,"enum('Pending','Processing','Completed','Cancelled','Refunded')",NOT NULL,'Pending',No,No,No,—,—,No,—,—,Dato de order status; el respaldo no incluye una descripción funcional adicional.,4
+tb_orders,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,4
+tb_orders,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,4
+tb_orders,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,4
+tb_payment_transaction,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,15
+tb_payment_transaction,payment_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_payment_transaction: tb_payment_transaction.payment_ID → tb_payments.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_payment_transaction(payment_ID),—,Identificador relacionado con payment.,15
+tb_payment_transaction,transaction_type,"enum('Charge','Refund','Authorization','Void')",NOT NULL,'Charge',No,No,No,—,—,No,—,—,Dato de transaction type; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,amount,"decimal(10,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,—,Dato de amount; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,currency,varchar(3),NOT NULL,'MXN',No,No,No,—,—,No,—,—,Dato de currency; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,gateway_transaction_id,varchar(255),NULL permitido,NULL,No,No,No,—,—,No,—,—,Identificador relacionado con gateway transaction id.,15
+tb_payment_transaction,gateway_response,text,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de gateway response; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,operation_status,"enum('Pending','Completed','Failed','Cancelled')",NOT NULL,'Pending',No,No,No,—,—,No,—,—,Dato de operation status; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,15
+tb_payment_transaction,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,15
+tb_payments,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,9
+tb_payments,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_payments_user: tb_payments.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_payments_user(user_ID),—,Identificador relacionado con user.,9
+tb_payments,payment_method_type_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_payments_method_type: tb_payments.payment_method_type_ID → tbc_payment_methods_types.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_payments_method_type(payment_method_type_ID),—,Identificador relacionado con payment method type.,9
+tb_payments,user_payment_method_ID,bigint unsigned,NULL permitido,NULL,No,No,fk_payments_user_method: tb_payments.user_payment_method_ID → tbd_user_payment_methods.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_payments_user_method(user_payment_method_ID),—,Identificador relacionado con user payment method.,9
+tb_payments,total_amount,"decimal(10,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,—,Dato de total amount; el respaldo no incluye una descripción funcional adicional.,9
+tb_payments,currency,varchar(3),NOT NULL,'MXN',No,No,No,—,—,No,—,—,Dato de currency; el respaldo no incluye una descripción funcional adicional.,9
+tb_payments,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,9
+tb_payments,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,9
+tb_payments,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,9
+tb_people,person_ID,bigint unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Identificador relacionado con person. Se incrementa automáticamente.,20000
+tb_people,user_ID,int unsigned,NULL permitido,NULL,No,No,fk_people_users: tb_people.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),Sí,user_ID(user_ID) UNIQUE,—,Identificador relacionado con user.,20000
+tb_people,courtesy_title,varchar(20),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de courtesy title; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,given_names,varchar(150),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de given names; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,family_names,varchar(150),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de family names; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,birth_date,date,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de birth date; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,gender,"enum('Hombre','Mujer','Prefiero no decirlo')",NOT NULL,'Prefiero no decirlo',No,No,No,—,—,No,—,—,Dato de gender; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,country_code,char(2),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de country code; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,phone,varchar(25),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de phone; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,status,bit(1),NULL permitido,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,creation_date,datetime,NULL permitido,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,20000
+tb_people,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,20000
+tb_products,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,5019
+tb_products,SKU,varchar(50),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,Sí,SKU(SKU) UNIQUE,—,Dato de SKU; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,name,varchar(250),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de name; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,description,text,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de description; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,current_price,"decimal(10,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,—,Dato de current price; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,current_stock,int unsigned,NOT NULL,'0',No,No,No,—,—,No,—,—,Dato de current stock; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,status,bit(1),NULL permitido,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,5019
+tb_products_users_providers,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_user1: tb_products_users_providers.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,—,—,Identificador relacionado con user.,15
+tb_products_users_providers,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_products2: tb_products_users_providers.product_ID → tb_products.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_products2(product_ID),—,Identificador relacionado con product.,15
+tb_products_users_providers,type_ownership,"enum('Owner','Reseller','Distributor')",NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de type ownership; el respaldo no incluye una descripción funcional adicional.,15
+tb_products_users_providers,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,15
+tb_products_users_providers,available_date,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de available date; el respaldo no incluye una descripción funcional adicional.,15
+tb_products_users_providers,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,15
+tb_products_users_providers,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,15
+tb_refunds,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,2
+tb_refunds,payment_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_refunds_payment: tb_refunds.payment_ID → tb_payments.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_refunds_payment(payment_ID),—,Identificador relacionado con payment.,2
+tb_refunds,cancellation_ID,int unsigned,NULL permitido,NULL,No,No,fk_refunds_cancellation: tb_refunds.cancellation_ID → tb_order_cancellations.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_refunds_cancellation(cancellation_ID),—,Identificador relacionado con cancellation.,2
+tb_refunds,return_ID,int unsigned,NULL permitido,NULL,No,No,fk_refunds_return: tb_refunds.return_ID → tb_returns.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_refunds_return(return_ID),—,Identificador relacionado con return.,2
+tb_refunds,refund_amount,"decimal(10,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,—,Dato de refund amount; el respaldo no incluye una descripción funcional adicional.,2
+tb_refunds,refund_reason,text,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de refund reason; el respaldo no incluye una descripción funcional adicional.,2
+tb_refunds,refund_status,"enum('Pending','Processing','Completed','Failed')",NOT NULL,'Pending',No,No,No,—,—,No,—,—,Dato de refund status; el respaldo no incluye una descripción funcional adicional.,2
+tb_refunds,gateway_refund_id,varchar(255),NULL permitido,NULL,No,No,No,—,—,No,—,—,Identificador relacionado con gateway refund id.,2
+tb_refunds,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,2
+tb_refunds,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,2
+tb_refunds,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,2
+tb_returns,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,1
+tb_returns,payment_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_returns_payment: tb_returns.payment_ID → tb_payments.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_returns_payment(payment_ID),—,Identificador relacionado con payment.,1
+tb_returns,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_returns_product: tb_returns.product_ID → tb_products.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_returns_product(product_ID),—,Identificador relacionado con product.,1
+tb_returns,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_returns_user: tb_returns.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_returns_user(user_ID),—,Identificador relacionado con user.,1
+tb_returns,quantity,int unsigned,NOT NULL,'1',No,No,No,—,—,No,—,—,Dato de quantity; el respaldo no incluye una descripción funcional adicional.,1
+tb_returns,return_reason,text,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de return reason; el respaldo no incluye una descripción funcional adicional.,1
+tb_returns,return_status,"enum('Requested','Received','Inspected','Accepted','Rejected')",NOT NULL,'Requested',No,No,No,—,—,No,—,—,Dato de return status; el respaldo no incluye una descripción funcional adicional.,1
+tb_returns,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,1
+tb_returns,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,1
+tb_returns,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,1
+tb_shipments,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,4
+tb_shipments,payment_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_shipments_payment: tb_shipments.payment_ID → tb_payments.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_shipments_payment(payment_ID),—,Identificador relacionado con payment.,4
+tb_shipments,shipping_company,varchar(100),NOT NULL,'E-commerce Logistics',No,No,No,—,—,No,—,—,Dato de shipping company; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,tracking_number,varchar(100),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de tracking number; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,shipping_cost,"decimal(10,2)",NOT NULL,'0.00',No,No,No,—,—,No,—,—,Dato de shipping cost; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,shipping_status,"enum('Pending','Preparing','Shipped','In_Transit','Delivered','Failed')",NOT NULL,'Pending',No,No,No,—,—,No,—,—,Dato de shipping status; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,shipped_date,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de shipped date; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,estimated_delivery_date,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de estimated delivery date; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,actual_delivery_date,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de actual delivery date; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,4
+tb_shipments,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,ID,bigint unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,4
+tb_user_addresses,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,fk_addresses_users: tb_user_addresses.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,idx_user_addresses(user_ID),—,Identificador relacionado con user.,4
+tb_user_addresses,address_label,varchar(100),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de address label; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,recipient_name,varchar(150),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de recipient name; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,recipient_phone,varchar(25),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de recipient phone; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,delivery_instructions,varchar(500),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de delivery instructions; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,latitude,"decimal(10,7)",NULL permitido,NULL,No,No,No,—,—,No,—,chk_coordinates: (((`latitude` is null) and (`longitude` is null)) or ((`latitude` is not null) and (`longitude` is not null))); chk_latitude: (`latitude` between -(90) and 90),Dato de latitude; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,longitude,"decimal(10,7)",NULL permitido,NULL,No,No,No,—,—,No,—,chk_coordinates: (((`latitude` is null) and (`longitude` is null)) or ((`latitude` is not null) and (`longitude` is not null))); chk_longitude: (`longitude` between -(180) and 180),Dato de longitude; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,is_default,tinyint(1),NOT NULL,'0',No,No,No,—,—,No,—,—,Dato de is default; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,4
+tb_user_addresses,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,4
+tb_users,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,20012
+tb_users,email,varchar(100),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,Sí,email(email) UNIQUE,—,Dato de email; el respaldo no incluye una descripción funcional adicional.,20012
+tb_users,nick,varchar(50),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,Sí,nick(nick) UNIQUE,—,Dato de nick; el respaldo no incluye una descripción funcional adicional.,20012
+tb_users,password,varchar(255),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de password; el respaldo no incluye una descripción funcional adicional.,20012
+tb_users,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,20012
+tb_users,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,20012
+tb_users,last_login,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last login; el respaldo no incluye una descripción funcional adicional.,20012
+tb_users,status,bit(1),NULL permitido,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,20012
+tbc_categories,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,100
+tbc_categories,name,varchar(120),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,Sí,name(name) UNIQUE,—,Dato de name; el respaldo no incluye una descripción funcional adicional.,100
+tbc_categories,description,text,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de description; el respaldo no incluye una descripción funcional adicional.,100
+tbc_categories,sup_id_category,int unsigned,NULL permitido,NULL,No,No,fk_superior_category: tbc_categories.sup_id_category → tbc_categories.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_superior_category(sup_id_category),—,Dato de sup id category; el respaldo no incluye una descripción funcional adicional.,100
+tbc_categories,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,100
+tbc_categories,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,100
+tbc_categories,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,100
+tbc_payment_methods_types,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,6
+tbc_payment_methods_types,code,varchar(30),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,Sí,code_UNIQUE(code) UNIQUE,—,Dato de code; el respaldo no incluye una descripción funcional adicional.,6
+tbc_payment_methods_types,description,text,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de description; el respaldo no incluye una descripción funcional adicional.,6
+tbc_payment_methods_types,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,6
+tbc_payment_methods_types,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,6
+tbc_payment_methods_types,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,6
+tbd_address_components,ID,bigint unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,"uk_address_component(address_ID,ID) UNIQUE",—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,23
+tbd_address_components,address_ID,bigint unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,"fk_component_address: tbd_address_components.address_ID → tb_user_addresses.ID; fk_component_parent: tbd_address_components.address_ID,address_sup_ID → tbd_address_components.address_ID,ID",RESTRICT; RESTRICT,RESTRICT (implícito),No,"uk_address_component(address_ID,ID) UNIQUE; idx_address_parent(address_ID,address_sup_ID)",—,Identificador relacionado con address.,23
+tbd_address_components,value,varchar(255),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de value; el respaldo no incluye una descripción funcional adicional.,23
+tbd_address_components,component_type,varchar(50),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de component type; el respaldo no incluye una descripción funcional adicional.,23
+tbd_address_components,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,23
+tbd_address_components,address_sup_ID,bigint unsigned,NULL permitido,NULL,No,No,"fk_component_parent: tbd_address_components.address_ID,address_sup_ID → tbd_address_components.address_ID,ID",RESTRICT,RESTRICT (implícito),No,"idx_address_parent(address_ID,address_sup_ID)",—,Identificador relacionado con address sup.,23
+tbd_address_components,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,23
+tbd_address_components,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,23
+tbd_cancellation_items,cancellation_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_cancellation_items_cancellation: tbd_cancellation_items.cancellation_ID → tb_order_cancellations.ID,RESTRICT (implícito),RESTRICT (implícito),No,—,—,Identificador relacionado con cancellation.,1
+tbd_cancellation_items,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_cancellation_items_product: tbd_cancellation_items.product_ID → tb_products.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_cancellation_items_product(product_ID),—,Identificador relacionado con product.,1
+tbd_cancellation_items,quantity,int unsigned,NOT NULL,'1',No,No,No,—,—,No,—,—,Dato de quantity; el respaldo no incluye una descripción funcional adicional.,1
+tbd_cancellation_items,cancellation_reason,text,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de cancellation reason; el respaldo no incluye una descripción funcional adicional.,1
+tbd_cancellation_items,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,1
+tbd_cancellation_items,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,1
+tbd_cancellation_items,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,1
+tbd_carts_items,cart_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,tbd_carts_items_ibfk_1: tbd_carts_items.cart_ID → tb_carts.ID,RESTRICT (implícito),RESTRICT (implícito),No,—,—,Identificador relacionado con cart.,22
+tbd_carts_items,provider_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,tbd_carts_items_ibfk_2: tbd_carts_items.provider_ID → tb_products_users_providers.user_ID,RESTRICT (implícito),RESTRICT (implícito),No,provider_ID(provider_ID),—,Identificador relacionado con provider.,22
+tbd_carts_items,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,tbd_carts_items_ibfk_3: tbd_carts_items.product_ID → tb_products_users_providers.product_ID,RESTRICT (implícito),RESTRICT (implícito),No,product_ID(product_ID),—,Identificador relacionado con product.,22
+tbd_carts_items,quantity,int unsigned,NOT NULL,'1',No,No,No,—,—,No,—,chk_cart_quantity: (`quantity` > 0),Dato de quantity; el respaldo no incluye una descripción funcional adicional.,22
+tbd_carts_items,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,22
+tbd_order_items,ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,0
+tbd_order_items,seller_order_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tbd_order_items_ibfk_1: tbd_order_items.seller_order_ID → tb_buyer_orders.ID,RESTRICT (implícito),RESTRICT (implícito),No,seller_order_ID(seller_order_ID),—,Identificador relacionado con seller order.,0
+tbd_order_items,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tbd_order_items_ibfk_2: tbd_order_items.product_ID → tb_products_users_providers.product_ID,RESTRICT (implícito),RESTRICT (implícito),No,product_ID(product_ID),—,Identificador relacionado con product.,0
+tbd_order_items,provider_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tbd_order_items_ibfk_3: tbd_order_items.provider_ID → tb_products_users_providers.user_ID,RESTRICT (implícito),RESTRICT (implícito),No,provider_ID(provider_ID),—,Identificador relacionado con provider.,0
+tbd_order_items,product_name,varchar(255),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de product name; el respaldo no incluye una descripción funcional adicional.,0
+tbd_order_items,quantity,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,tbd_order_items_chk_1: (`quantity` > 0),Dato de quantity; el respaldo no incluye una descripción funcional adicional.,0
+tbd_order_items,unit_price,"decimal(12,2)",NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,tbd_order_items_chk_2: (`unit_price` >= 0),Dato de unit price; el respaldo no incluye una descripción funcional adicional.,0
+tbd_order_items,subtotal,"decimal(12,2)",NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de subtotal; el respaldo no incluye una descripción funcional adicional.,0
+tbd_order_items,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,0
+tbd_product_categories,product_Id,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_pc_product: tbd_product_categories.product_Id → tb_products.ID,RESTRICT (implícito),RESTRICT (implícito),No,—,—,Identificador relacionado con product Id.,13904
+tbd_product_categories,category_Id,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_pc_category: tbd_product_categories.category_Id → tbc_categories.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_pc_category(category_Id),—,Identificador relacionado con category Id.,13904
+tbd_product_categories,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,13904
+tbd_product_categories,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,13904
+tbd_product_categories,last_update,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,13904
+tbd_return_items,return_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_return_items_return: tbd_return_items.return_ID → tb_returns.ID,RESTRICT (implícito),RESTRICT (implícito),No,—,—,Identificador relacionado con return.,1
+tbd_return_items,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_return_items_product: tbd_return_items.product_ID → tb_products.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_return_items_product(product_ID),—,Identificador relacionado con product.,1
+tbd_return_items,quantity,int unsigned,NOT NULL,'1',No,No,No,—,—,No,—,—,Dato de quantity; el respaldo no incluye una descripción funcional adicional.,1
+tbd_return_items,item_condition,"enum('New','Opened','Defective','Damaged')",NOT NULL,'Opened',No,No,No,—,—,No,—,—,Dato de item condition; el respaldo no incluye una descripción funcional adicional.,1
+tbd_return_items,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,1
+tbd_return_items,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,1
+tbd_return_items,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,1
+tbd_user_payment_methods,ID,bigint unsigned,NOT NULL,Sin valor predeterminado explícito,Sí,Sí,No,—,—,No,—,—,Dato de ID; el respaldo no incluye una descripción funcional adicional. Se incrementa automáticamente.,4
+tbd_user_payment_methods,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tbd_user_payment_methods_ibfk_1: tbd_user_payment_methods.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,user_ID(user_ID),—,Identificador relacionado con user.,4
+tbd_user_payment_methods,payment_method_type_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,No,tbd_user_payment_methods_ibfk_2: tbd_user_payment_methods.payment_method_type_ID → tbc_payment_methods_types.ID,RESTRICT (implícito),RESTRICT (implícito),No,payment_method_type_ID(payment_method_type_ID),—,Identificador relacionado con payment method type.,4
+tbd_user_payment_methods,provider,varchar(60),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,"uk_provider_method(provider,provider_method_ref) UNIQUE",—,Dato de provider; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,provider_method_ref,varchar(255),NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,"uk_provider_method(provider,provider_method_ref) UNIQUE",—,Dato de provider method ref; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,label,varchar(100),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de label; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,last_four,char(4),NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last four; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,is_default,tinyint(1),NOT NULL,'0',No,No,No,—,—,No,—,—,Dato de is default; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,4
+tbd_user_payment_methods,last_update,datetime,NULL permitido,NULL,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,4
+tbd_users_wishlist_products,user_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_user2: tbd_users_wishlist_products.user_ID → tb_users.ID,RESTRICT (implícito),RESTRICT (implícito),No,—,—,Identificador relacionado con user.,0
+tbd_users_wishlist_products,product_ID,int unsigned,NOT NULL,Sin valor predeterminado explícito,No,Sí,fk_products3: tbd_users_wishlist_products.product_ID → tb_products.ID,RESTRICT (implícito),RESTRICT (implícito),No,fk_products3(product_ID),—,Identificador relacionado con product.,0
+tbd_users_wishlist_products,status,bit(1),NOT NULL,b'1',No,No,No,—,—,No,—,—,Dato de status; el respaldo no incluye una descripción funcional adicional.,0
+tbd_users_wishlist_products,creation_date,datetime,NOT NULL,CURRENT_TIMESTAMP,No,No,No,—,—,No,—,—,Dato de creation date; el respaldo no incluye una descripción funcional adicional.,0
+tbd_users_wishlist_products,last_update,datetime,NOT NULL,Sin valor predeterminado explícito,No,No,No,—,—,No,—,—,Dato de last update; el respaldo no incluye una descripción funcional adicional.,0
